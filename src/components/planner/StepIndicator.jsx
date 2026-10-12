@@ -1,9 +1,4 @@
-type StepIndicatorProps = {
-  currentStep: number;
-  totalSteps: number;
-};
-
-export function StepIndicator({ currentStep, totalSteps }: StepIndicatorProps) {
+export function StepIndicator({ currentStep, totalSteps }) {
   return (
     <div className="step-indicator" aria-label={`Step ${currentStep + 1} of ${totalSteps}`}>
       {Array.from({ length: totalSteps }).map((_, index) => (

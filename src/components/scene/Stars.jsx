@@ -21,11 +21,7 @@ const STARS = [
   [82, 52, 0.3],
 ];
 
-type StarsProps = {
-  opacity: number;
-};
-
-export function Stars({ opacity }: StarsProps) {
+export function Stars({ opacity }) {
   return (
     <motion.div className="stars" style={{ opacity }} animate={{ opacity }} transition={{ duration: 0.8 }} aria-hidden="true">
       {STARS.map(([left, top, scale], index) => (

@@ -1,11 +1,5 @@
 import { motion } from "motion/react";
-import type { DayMoment } from "../../types/dayPlan";
-
-type ActivityMomentProps = {
-  moment: DayMoment;
-};
-
-export function ActivityMoment({ moment }: ActivityMomentProps) {
+export function ActivityMoment({ moment }) {
   return (
     <motion.div
       className="activity-moment"

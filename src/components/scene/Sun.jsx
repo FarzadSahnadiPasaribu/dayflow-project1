@@ -1,11 +1,5 @@
 import { motion } from "motion/react";
-import type { EnvironmentState } from "../../utils/environment";
-
-type SunProps = {
-  environment: EnvironmentState;
-};
-
-export function Sun({ environment }: SunProps) {
+export function Sun({ environment }) {
   return (
     <motion.div
       className="sun"

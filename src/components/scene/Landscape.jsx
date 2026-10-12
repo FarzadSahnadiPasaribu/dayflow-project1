@@ -1,9 +1,3 @@
-import type { EnvironmentState } from "../../utils/environment";
-
-type LandscapeProps = {
-  environment: EnvironmentState;
-};
-
 const WINDOWS = [
   [61.7, 75.6],
   [63.2, 70.4],
@@ -15,7 +9,7 @@ const WINDOWS = [
   [89.1, 80.1],
 ];
 
-export function Landscape({ environment }: LandscapeProps) {
+export function Landscape({ environment }) {
   return (
     <svg className="landscape" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
       <path

@@ -1,13 +1,7 @@
-import type { DayPlan } from "../../types/dayPlan";
 import { sliderMinutesToTime, timeToMinutes } from "../../utils/time";
 import { TimeSlider } from "../ui/TimeSlider";
 
-type WakeUpStepProps = {
-  plan: DayPlan;
-  updatePlan: (patch: Partial<DayPlan>) => void;
-};
-
-export function WakeUpStep({ plan, updatePlan }: WakeUpStepProps) {
+export function WakeUpStep({ plan, updatePlan }) {
   return (
     <div className="question-block">
       <p className="step-label">01 / WAKE UP</p>

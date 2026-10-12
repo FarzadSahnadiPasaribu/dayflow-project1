@@ -1,14 +1,7 @@
-import type { DayPlan } from "../../types/dayPlan";
 import { sliderMinutesToTime, windDownToAbsoluteMinutes } from "../../utils/time";
 import { TimeSlider } from "../ui/TimeSlider";
 
-type WindDownStepProps = {
-  plan: DayPlan;
-  error?: string;
-  updatePlan: (patch: Partial<DayPlan>) => void;
-};
-
-export function WindDownStep({ plan, error, updatePlan }: WindDownStepProps) {
+export function WindDownStep({ plan, error, updatePlan }) {
   return (
     <div className="question-block">
       <p className="step-label">05 / WIND DOWN</p>

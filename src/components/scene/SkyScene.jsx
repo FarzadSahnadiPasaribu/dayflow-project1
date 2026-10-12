@@ -1,5 +1,3 @@
-import type { CSSProperties } from "react";
-import type { DayPlan, EnergyLevel } from "../../types/dayPlan";
 import { getEnvironmentForTime } from "../../utils/environment";
 import { Clouds } from "./Clouds";
 import { Landscape } from "./Landscape";
@@ -7,14 +5,7 @@ import { Moon } from "./Moon";
 import { Stars } from "./Stars";
 import { Sun } from "./Sun";
 
-type SkySceneProps = {
-  timeMinutes: number;
-  energy?: EnergyLevel | "";
-  plan?: DayPlan;
-  showMissionNote?: boolean;
-};
-
-export function SkyScene({ timeMinutes, energy = "", plan, showMissionNote = false }: SkySceneProps) {
+export function SkyScene({ timeMinutes, energy = "", plan, showMissionNote = false }) {
   const environment = getEnvironmentForTime(timeMinutes, energy);
   const mission = plan?.mission.trim();
 
@@ -29,7 +20,7 @@ export function SkyScene({ timeMinutes, energy = "", plan, showMissionNote = fal
           "--sky-bottom": environment.skyBottom,
           "--horizon": environment.horizon,
           "--scene-brightness": environment.brightness,
-        } as CSSProperties
+        }
       }
     >
       <div className="sky-gradient" />

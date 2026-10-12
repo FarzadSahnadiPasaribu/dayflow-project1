@@ -1,17 +1,10 @@
-import type { DayMoment, DayPlan } from "../../types/dayPlan";
 import { DayTimeline } from "../timeline/DayTimeline";
 
-type MomentsStepProps = {
-  plan: DayPlan;
-  error?: string;
-  updatePlan: (patch: Partial<DayPlan>) => void;
-};
-
-function updateMoment(moments: DayMoment[], index: number, patch: Partial<DayMoment>) {
+function updateMoment(moments, index, patch) {
   return moments.map((moment, momentIndex) => (momentIndex === index ? { ...moment, ...patch } : moment));
 }
 
-export function MomentsStep({ plan, error, updatePlan }: MomentsStepProps) {
+export function MomentsStep({ plan, error, updatePlan }) {
   return (
     <div className="question-block question-block--wide">
       <p className="step-label">04 / MY DAY</p>

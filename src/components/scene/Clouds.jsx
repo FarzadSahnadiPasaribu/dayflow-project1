@@ -1,17 +1,11 @@
 import { motion } from "motion/react";
-import type { EnvironmentState } from "../../utils/environment";
-
-type CloudsProps = {
-  environment: EnvironmentState;
-};
-
 const CLOUDS = [
   { top: "16%", left: "-14%", width: 210, duration: 80, delay: 0 },
   { top: "28%", left: "44%", width: 160, duration: 96, delay: -32 },
   { top: "10%", left: "72%", width: 120, duration: 112, delay: -57 },
 ];
 
-export function Clouds({ environment }: CloudsProps) {
+export function Clouds({ environment }) {
   return (
     <div className="cloud-layer" style={{ opacity: environment.cloudOpacity }} aria-hidden="true">
       {CLOUDS.map((cloud) => (

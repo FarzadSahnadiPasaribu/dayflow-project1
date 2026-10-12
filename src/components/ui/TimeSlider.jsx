@@ -1,17 +1,4 @@
-import type { CSSProperties } from "react";
 import { sliderMinutesToTime } from "../../utils/time";
-
-type TimeSliderProps = {
-  id: string;
-  label: string;
-  value: number;
-  min: number;
-  max: number;
-  step?: number;
-  minLabel?: string;
-  maxLabel?: string;
-  onChange: (value: number) => void;
-};
 
 export function TimeSlider({
   id,
@@ -23,7 +10,7 @@ export function TimeSlider({
   minLabel,
   maxLabel,
   onChange,
-}: TimeSliderProps) {
+}) {
   const percent = ((value - min) / (max - min)) * 100;
 
   return (
@@ -42,7 +29,7 @@ export function TimeSlider({
         step={step}
         value={value}
         aria-label={label}
-        style={{ "--slider-progress": `${percent}%` } as CSSProperties}
+        style={{ "--slider-progress": `${percent}%` }}
         onChange={(event) => onChange(Number(event.target.value))}
       />
       <div className="time-slider__labels" aria-hidden="true">

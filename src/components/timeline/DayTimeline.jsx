@@ -1,13 +1,6 @@
-import type { DayPlan } from "../../types/dayPlan";
 import { getPlanMomentMinutes, planTimeRange, progressBetween } from "../../utils/time";
 
-type DayTimelineProps = {
-  plan: DayPlan;
-  currentMinutes?: number;
-  compact?: boolean;
-};
-
-export function DayTimeline({ plan, currentMinutes, compact = false }: DayTimelineProps) {
+export function DayTimeline({ plan, currentMinutes, compact = false }) {
   const { start, end } = planTimeRange(plan.wakeTime, plan.windDownTime);
   const playhead = currentMinutes === undefined ? 0 : progressBetween(currentMinutes, start, end) * 100;
 

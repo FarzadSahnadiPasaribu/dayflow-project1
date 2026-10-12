@@ -1,39 +1,6 @@
-import type { EnergyLevel } from "../types/dayPlan";
 import { clamp } from "./time";
 
-export type EnvironmentState = {
-  skyTop: string;
-  skyMid: string;
-  skyBottom: string;
-  horizon: string;
-  sunX: number;
-  sunY: number;
-  sunOpacity: number;
-  moonX: number;
-  moonY: number;
-  moonOpacity: number;
-  starOpacity: number;
-  landscapeTone: string;
-  foregroundTone: string;
-  buildingLights: number;
-  cloudOpacity: number;
-  cloudSpeed: number;
-  brightness: number;
-};
-
-type Color = [number, number, number];
-
-type TimeStop = {
-  minute: number;
-  top: Color;
-  mid: Color;
-  bottom: Color;
-  horizon: Color;
-  landscape: Color;
-  foreground: Color;
-};
-
-const STOPS: TimeStop[] = [
+const STOPS = [
   {
     minute: 300,
     top: [18, 28, 58],
@@ -108,16 +75,16 @@ const STOPS: TimeStop[] = [
   },
 ];
 
-function lerp(start: number, end: number, amount: number) {
+function lerp(start, end, amount) {
   return start + (end - start) * amount;
 }
 
-function mixColor(start: Color, end: Color, amount: number) {
+function mixColor(start, end, amount) {
   const color = start.map((channel, index) => Math.round(lerp(channel, end[index], amount)));
   return `rgb(${color[0]} ${color[1]} ${color[2]})`;
 }
 
-function findStops(minutes: number) {
+function findStops(minutes) {
   const current = clamp(minutes, STOPS[0].minute, STOPS[STOPS.length - 1].minute);
   for (let index = 0; index < STOPS.length - 1; index += 1) {
     const start = STOPS[index];
@@ -134,7 +101,7 @@ function findStops(minutes: number) {
   return { start: STOPS[0], end: STOPS[0], amount: 0 };
 }
 
-function getSun(minutes: number) {
+function getSun(minutes) {
   const daylightStart = 330;
   const daylightEnd = 1170;
   const daylightProgress = clamp((minutes - daylightStart) / (daylightEnd - daylightStart), 0, 1);
@@ -150,7 +117,7 @@ function getSun(minutes: number) {
   };
 }
 
-function getMoon(minutes: number) {
+function getMoon(minutes) {
   const nightProgress =
     minutes >= 1110 ? clamp((minutes - 1110) / 330, 0, 1) : clamp((minutes + 330) / 660, 0, 1);
   return {
@@ -160,7 +127,7 @@ function getMoon(minutes: number) {
   };
 }
 
-function energyModifiers(energy: EnergyLevel | "") {
+function energyModifiers(energy) {
   switch (energy) {
     case "low":
       return { brightness: 0.88, cloudOpacity: 0.86, cloudSpeed: 0.76 };
@@ -173,7 +140,7 @@ function energyModifiers(energy: EnergyLevel | "") {
   }
 }
 
-export function getEnvironmentForTime(minutes: number, energy: EnergyLevel | "" = ""): EnvironmentState {
+export function getEnvironmentForTime(minutes, energy = "") {
   const { start, end, amount } = findStops(minutes);
   const sun = getSun(minutes);
   const moon = getMoon(minutes);

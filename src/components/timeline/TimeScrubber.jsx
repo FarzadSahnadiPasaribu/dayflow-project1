@@ -1,14 +1,6 @@
-import type { CSSProperties } from "react";
-import type { DayPlan } from "../../types/dayPlan";
 import { minutesToTime, planTimeRange } from "../../utils/time";
 
-type TimeScrubberProps = {
-  plan: DayPlan;
-  currentMinutes: number;
-  onChange: (minutes: number) => void;
-};
-
-export function TimeScrubber({ plan, currentMinutes, onChange }: TimeScrubberProps) {
+export function TimeScrubber({ plan, currentMinutes, onChange }) {
   const { start, end } = planTimeRange(plan.wakeTime, plan.windDownTime);
   const percent = ((currentMinutes - start) / (end - start)) * 100;
 
@@ -24,7 +16,7 @@ export function TimeScrubber({ plan, currentMinutes, onChange }: TimeScrubberPro
           max={end}
           step={5}
           value={currentMinutes}
-          style={{ "--slider-progress": `${percent}%` } as CSSProperties}
+          style={{ "--slider-progress": `${percent}%` }}
           onChange={(event) => onChange(Number(event.target.value))}
         />
         <span aria-hidden="true">MOON</span>

@@ -22,7 +22,7 @@ The project turns a simple five-step everyday-life form into a visual story. A u
 ## Tech Stack
 
 - React
-- TypeScript
+- JavaScript / JSX
 - Vite
 - CSS
 - Motion for React

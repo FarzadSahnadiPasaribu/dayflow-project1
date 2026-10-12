@@ -1,22 +1,15 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { DayMoment, DayPlan } from "../../types/dayPlan";
 import { getPlanMomentMinutes, minutesToTime, planTimeRange } from "../../utils/time";
 import { DayTimeline } from "../timeline/DayTimeline";
 import { ActivityMoment } from "./ActivityMoment";
 
-type DaySimulationProps = {
-  plan: DayPlan;
-  onTimeChange: (minutes: number) => void;
-  onComplete: () => void;
-};
-
 const SIMULATION_DURATION = 12500;
 
-export function DaySimulation({ plan, onTimeChange, onComplete }: DaySimulationProps) {
+export function DaySimulation({ plan, onTimeChange, onComplete }) {
   const { start, end } = planTimeRange(plan.wakeTime, plan.windDownTime);
   const [currentMinutes, setCurrentMinutes] = useState(start);
-  const [activeMoment, setActiveMoment] = useState<DayMoment | null>(null);
+  const [activeMoment, setActiveMoment] = useState(null);
   const completed = useRef(false);
   const lastUpdate = useRef(0);
   const onTimeChangeRef = useRef(onTimeChange);
@@ -36,7 +29,7 @@ export function DaySimulation({ plan, onTimeChange, onComplete }: DaySimulationP
     let frame = 0;
     let startedAt = 0;
 
-    function tick(timestamp: number) {
+    function tick(timestamp) {
       if (!startedAt) startedAt = timestamp;
       const elapsed = timestamp - startedAt;
       const progress = Math.min(elapsed / SIMULATION_DURATION, 1);

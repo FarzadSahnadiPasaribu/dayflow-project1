@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
-import type { DayPlan } from "../../types/dayPlan";
 import { getPlanMomentMinutes, planTimeRange } from "../../utils/time";
 import { Button } from "../ui/Button";
 import { EnergyStep } from "./EnergyStep";
@@ -10,16 +9,9 @@ import { StepIndicator } from "./StepIndicator";
 import { WakeUpStep } from "./WakeUpStep";
 import { WindDownStep } from "./WindDownStep";
 
-type PlannerProps = {
-  plan: DayPlan;
-  updatePlan: (patch: Partial<DayPlan>) => void;
-  onTimePreview: (minutes: number) => void;
-  onStartSimulation: () => void;
-};
-
 const TOTAL_STEPS = 5;
 
-function validateStep(step: number, plan: DayPlan) {
+function validateStep(step, plan) {
   if (step === 1) {
     if (!plan.mission.trim()) return "Give the day one clear mission.";
     if (!plan.category) return "Choose the kind of day this mission belongs to.";
@@ -48,7 +40,7 @@ function validateStep(step: number, plan: DayPlan) {
   return "";
 }
 
-export function Planner({ plan, updatePlan, onTimePreview, onStartSimulation }: PlannerProps) {
+export function Planner({ plan, updatePlan, onTimePreview, onStartSimulation }) {
   const [step, setStep] = useState(0);
   const [error, setError] = useState("");
 

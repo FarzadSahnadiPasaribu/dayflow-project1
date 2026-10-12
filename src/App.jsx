@@ -7,12 +7,9 @@ import { TimeScrubber } from "./components/timeline/TimeScrubber";
 import { Button } from "./components/ui/Button";
 import { SkyScene } from "./components/scene/SkyScene";
 import { useStoredPlan } from "./hooks/useStoredPlan";
-import type { DayPlan } from "./types/dayPlan";
 import { timeToMinutes, windDownToAbsoluteMinutes } from "./utils/time";
 
-type AppState = "intro" | "planner" | "simulation" | "complete" | "timeline";
-
-const DEFAULT_PLAN: DayPlan = {
+const DEFAULT_PLAN = {
   wakeTime: "07:00",
   mission: "",
   category: "",
@@ -27,8 +24,8 @@ const DEFAULT_PLAN: DayPlan = {
 
 function App() {
   const storage = useStoredPlan(DEFAULT_PLAN);
-  const [plan, setPlan] = useState<DayPlan>(storage.initialPlan);
-  const [appState, setAppState] = useState<AppState>("intro");
+  const [plan, setPlan] = useState(storage.initialPlan);
+  const [appState, setAppState] = useState("intro");
   const [previewMinutes, setPreviewMinutes] = useState(timeToMinutes(storage.initialPlan.wakeTime));
   const [scrubMinutes, setScrubMinutes] = useState(timeToMinutes(storage.initialPlan.wakeTime));
 
@@ -39,7 +36,7 @@ function App() {
     return previewMinutes;
   }, [appState, plan.windDownTime, previewMinutes, scrubMinutes]);
 
-  function updatePlan(patch: Partial<DayPlan>) {
+  function updatePlan(patch) {
     setPlan((current) => ({ ...current, ...patch }));
   }
 

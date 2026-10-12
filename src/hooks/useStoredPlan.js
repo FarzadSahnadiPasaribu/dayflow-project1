@@ -1,13 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import type { DayPlan } from "../types/dayPlan";
-
 const STORAGE_KEY = "dayflow.completedPlan";
 
-export function useStoredPlan(defaultPlan: DayPlan) {
-  const [storedPlan, setStoredPlan] = useState<DayPlan | null>(() => {
+export function useStoredPlan(defaultPlan) {
+  const [storedPlan, setStoredPlan] = useState(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? (JSON.parse(raw) as DayPlan) : null;
+      return raw ? JSON.parse(raw) : null;
     } catch {
       return null;
     }
@@ -20,7 +18,7 @@ export function useStoredPlan(defaultPlan: DayPlan) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(storedPlan));
   }, [storedPlan]);
 
-  function savePlan(plan: DayPlan) {
+  function savePlan(plan) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(plan));
     setStoredPlan(plan);
   }

@@ -1,20 +1,13 @@
-import type { DayPlan, MissionCategory } from "../../types/dayPlan";
 import { ChoiceButton } from "../ui/ChoiceButton";
 
-type MissionStepProps = {
-  plan: DayPlan;
-  error?: string;
-  updatePlan: (patch: Partial<DayPlan>) => void;
-};
-
-const CATEGORIES: { value: MissionCategory; label: string }[] = [
+const CATEGORIES = [
   { value: "study", label: "STUDY" },
   { value: "work", label: "WORK" },
   { value: "health", label: "HEALTH" },
   { value: "personal", label: "PERSONAL" },
 ];
 
-export function MissionStep({ plan, error, updatePlan }: MissionStepProps) {
+export function MissionStep({ plan, error, updatePlan }) {
   return (
     <div className="question-block">
       <p className="step-label">02 / MAIN MISSION</p>

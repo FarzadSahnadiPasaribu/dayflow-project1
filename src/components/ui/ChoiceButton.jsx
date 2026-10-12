@@ -1,13 +1,5 @@
 import { motion } from "motion/react";
-import type { HTMLMotionProps } from "motion/react";
-import type { ReactNode } from "react";
-
-type ChoiceButtonProps = HTMLMotionProps<"button"> & {
-  active: boolean;
-  children: ReactNode;
-};
-
-export function ChoiceButton({ active, children, className = "", ...props }: ChoiceButtonProps) {
+export function ChoiceButton({ active, children, className = "", ...props }) {
   return (
     <motion.button
       type="button"

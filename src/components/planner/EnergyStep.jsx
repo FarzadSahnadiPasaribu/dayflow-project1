@@ -1,20 +1,13 @@
-import type { DayPlan, EnergyLevel } from "../../types/dayPlan";
 import { ChoiceButton } from "../ui/ChoiceButton";
 
-type EnergyStepProps = {
-  plan: DayPlan;
-  error?: string;
-  updatePlan: (patch: Partial<DayPlan>) => void;
-};
-
-const ENERGY_OPTIONS: { value: EnergyLevel; label: string; marker: string }[] = [
+const ENERGY_OPTIONS = [
   { value: "low", label: "LOW", marker: "REST" },
   { value: "okay", label: "OKAY", marker: "STEADY" },
   { value: "good", label: "GOOD", marker: "BRIGHT" },
   { value: "great", label: "GREAT", marker: "FULL" },
 ];
 
-export function EnergyStep({ plan, error, updatePlan }: EnergyStepProps) {
+export function EnergyStep({ plan, error, updatePlan }) {
   return (
     <div className="question-block">
       <p className="step-label">03 / ENERGY</p>
